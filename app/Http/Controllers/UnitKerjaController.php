@@ -14,7 +14,7 @@ class UnitKerjaController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
-        $this->middleware('auth.admin')->only(['create']);
+        $this->middleware('auth.admin')->only(['create', 'update', 'delete']);
     }
 
     public function index(UnitKerja $unitKerja)
@@ -39,7 +39,19 @@ class UnitKerjaController extends Controller
         return new UnitKerjaResource($unitKerja);
     }
 
-    public function update(int $unit_kerja_id, PostUnitKerjaRequest $postUnitKerjaRequest)
+    public function update(int $unit_kerja_id, PostUnitKerjaRequest $request)
     {
+        $unitKerja = new UnitKerja();
+
+        // $unitKerja::find($unit_kerja_id);
+
+        try {
+            //code...
+            $unitKerja::find($unit_kerja_id)->update(['name' => $request->name]);
+            return new UnitKerjaResource($unitKerja::find($unit_kerja_id));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+        }
     }
 }
