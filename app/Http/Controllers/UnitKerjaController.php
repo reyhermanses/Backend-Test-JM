@@ -51,7 +51,7 @@ class UnitKerjaController extends Controller
             return new UnitKerjaResource($unitKerja::find($unit_kerja_id));
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+            return response()->json(['status' => 'error', 'message' => 'Unit kerja tidak ada dalam database']);
         }
     }
 }

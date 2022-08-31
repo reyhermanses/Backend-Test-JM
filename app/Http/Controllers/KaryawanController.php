@@ -103,7 +103,7 @@ class KaryawanController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Karyawan berhasil di hapus. ']);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
+            return response()->json(['status' => 'error', 'message' => 'Unit kerja tidak ada dalam database']);
         }
     }
 }
