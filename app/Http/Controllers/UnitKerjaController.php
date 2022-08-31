@@ -54,4 +54,15 @@ class UnitKerjaController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Unit kerja tidak ada dalam database !']);
         }
     }
+
+    public function delete(int $unit_kerja_id, UnitKerja $unitKerja){
+        try {
+            //code...
+            $unitKerja::find($unit_kerja_id)->delete();
+            return response()->json(['status' => 'success', 'message' => 'Unit kerja berhasil dihapus !']);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['status' => 'error', 'message' => 'Unit kerja tidak ada dalam database !']);
+        }
+    }
 }

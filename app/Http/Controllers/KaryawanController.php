@@ -94,16 +94,13 @@ class KaryawanController extends Controller
 
     public function delete(int $karyawanId, Karyawan $karyawan)
     {
-
-        $karyawan::find($karyawanId);
-
         try {
             //code...
             $karyawan::find($karyawanId)->delete();
-            return response()->json(['status' => 'error', 'message' => 'Karyawan berhasil di hapus. ']);
+            return response()->json(['status' => 'success', 'message' => 'Data karyawan berhasil dihapus !']);
         } catch (\Throwable $th) {
             //throw $th;
-            return response()->json(['status' => 'error', 'message' => 'Unit kerja tidak ada dalam database !']);
+            return response()->json(['status' => 'error', 'message' => 'Data karyawan tidak ada dalam database !']);
         }
     }
 }
