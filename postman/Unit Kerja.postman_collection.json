@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "3d39d0d5-8bde-4c83-a3ba-95b344d73b26",
+		"name": "Unit Kerja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8750643"
+	},
+	"item": [
+		{
+			"name": "Create Unit Kerja",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Divisi pengembangan aplikasi IT",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/unit-kerja/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"unit-kerja",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Unit Kerja",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/unit-kerja/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"unit-kerja",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Unit Kerja",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Staff IT Support II",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/unit-kerja/10000/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"unit-kerja",
+						"10000",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Unit Kerja",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/unit-kerja/1/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"unit-kerja",
+						"1",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

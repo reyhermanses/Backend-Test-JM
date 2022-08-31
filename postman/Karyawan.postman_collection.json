@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "c9235cb1-de88-45e2-a237-9bb05c5c30b0",
+		"name": "Karyawan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8750643"
+	},
+	"item": [
+		{
+			"name": "Create Karyawan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nik",
+							"value": "7171030002001",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "karyawan1",
+							"type": "text"
+						},
+						{
+							"key": "unit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "position_name",
+							"value": "Mobile & Web Programmer",
+							"type": "text"
+						},
+						{
+							"key": "date_of_birth",
+							"value": "1988-07-08",
+							"type": "text"
+						},
+						{
+							"key": "place_of_birth",
+							"value": "Tahuna",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/karyawan/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"karyawan",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Karyawan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "DHgRDy1AzyrxVp1PfSXr9fUPDwsmurQWWgUWYMtu72kC7lhKokTcPPOCXrfwnNxBDMzXO4RfbNO6oLb1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nik",
+							"value": "7171030002032",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "karyawan1",
+							"type": "text"
+						},
+						{
+							"key": "unit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "position_name",
+							"value": "Mobile & Web Programmer",
+							"type": "text"
+						},
+						{
+							"key": "date_of_birth",
+							"value": "1988-07-08",
+							"type": "text"
+						},
+						{
+							"key": "place_of_birth",
+							"value": "Tahuna",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/karyawan/9/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"karyawan",
+						"9",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Karyawan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "DHgRDy1AzyrxVp1PfSXr9fUPDwsmurQWWgUWYMtu72kC7lhKokTcPPOCXrfwnNxBDMzXO4RfbNO6oLb1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/karyawan",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"karyawan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import Excel Karyawan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/reyamsterdam/Downloads/tenchnicaltest-mii/technicaltest/karyawan.xls"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/karyawan/import",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"karyawan",
+						"import"
+					],
+					"query": [
+						{
+							"key": "file",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
