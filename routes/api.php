@@ -18,7 +18,7 @@ use App\Http\Controllers\UnitKerjaController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
