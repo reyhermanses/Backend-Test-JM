@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -16,21 +17,35 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        $this->middleware('auth.admin')->only(['index']);
+    }
+
     public function index()
     {
         //
+
+        return new UserResource(User::all());
+    }
+
+    public function logged_user_information(Request $request)
+    {
+        return $request->user();
     }
 
     public function login(Request $request)
     {
-       
+
         // $login = Auth::Attempt($request->all());
         $credentials = request(['username', 'password']);
-        
+
         if (Auth::Attempt($request->all())) {
 
             $user = Auth::user();
-            
+
             $user->api_token = Str::random(100);
             $user->save();
             $user->makeVisible('api_token');
@@ -42,7 +57,7 @@ class UserController extends Controller
                 'message' => 'Login Berhasil',
                 'conntent' => $user
             ]);
-        }else{
+        } else {
             return response()->json([
                 'response_code' => 404,
                 'message' => 'Username atau Password Tidak Ditemukan!'
