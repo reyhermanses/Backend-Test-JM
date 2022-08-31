@@ -27,9 +27,11 @@ Route::post('/users/login', [UserController::class, 'login']);
 
 Route::get('/unit-kerja', [UnitKerjaController::class, 'index']);
 Route::post('/unit-kerja', [UnitKerjaController::class, 'create']);
-Route::put('/unit-kerja/{id}/update', [UnitKerjaController::class, 'update']);
+Route::post('/unit-kerja/{id}/update', [UnitKerjaController::class, 'update']);
+Route::delete('/unit-kerja/{id}/delete', [UnitKerjaController::class, 'delete']);
 
 Route::get('/karyawan', [KaryawanController::class, 'index']);
 Route::post('/karyawan', [KaryawanController::class, 'create']);
 Route::post('/karyawan/import', [KaryawanController::class, 'import']);
 Route::post('/karyawan/{id}/update', [KaryawanController::class, 'update']);
+Route::delete('/karyawan/{id}/delete', [KaryawanController::class, 'delete']);
