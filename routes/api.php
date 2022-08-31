@@ -18,9 +18,8 @@ use App\Http\Controllers\UnitKerjaController;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/user/detail', [UserController::class, 'logged_user_information']);
+Route::get('/user', [UserController::class, 'index']);
 
 Route::post('/users/register/',  [UserController::class, 'create']);
 Route::post('/users/login', [UserController::class, 'login']);
