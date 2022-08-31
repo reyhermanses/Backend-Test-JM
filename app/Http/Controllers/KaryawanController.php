@@ -16,7 +16,7 @@ class KaryawanController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
-        $this->middleware('auth.admin')->only(['create', 'import']);
+        $this->middleware('auth.admin')->only(['create', 'import', 'update']);
     }
 
     public function index(Karyawan $karyawan)
