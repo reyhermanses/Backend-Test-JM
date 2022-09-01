@@ -72,51 +72,19 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @guest
-                        @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" data-value="dashboard">Dashboard</a>
                         </li>
-                        @endif
-
-                        @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link uk" data-value="unit">Unit Kerja</a>
                         </li>
-                        @endif
-                        @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Perusahaan
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">
-                                    Unit Kerja
-                                </a>
-
-                                <a class="dropdown-item" href="">
-                                    Karyawan
-                                </a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link kr" data-value="karyawan">Karyawan</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link lg" data-value="logout">Logout</a>
                         </li>
-                        @endguest
+
                     </ul>
                 </div>
             </div>
@@ -129,3 +97,58 @@
 </body>
 
 </html>
+
+<script>
+    $(document).ready(function() {
+
+        api_token = localStorage.getItem('api_token') == null ? null : localStorage.getItem('api_token');
+        menu = localStorage.getItem('menu') == null ? null : localStorage.getItem('menu');
+
+        if (api_token != null) {
+            $(".uk").show();
+                $(".kr").show();
+                $(".lg").show();
+
+            if (menu != null) {
+                displayMenu = menu;
+            } else {
+                displayMenu = 'dashboard';
+            }
+        } else {
+            $(".uk").hide();
+                $(".kr").hide();
+                $(".lg").hide();
+            displayMenu = '/login';
+        }
+
+        $(".py-4").load(displayMenu);
+
+        jQuery('body').on('click', '.nav-link', function(e) {
+
+            menu = $(this).attr("data-value");
+            link = $(this).attr('href');
+
+            localStorage.removeItem("menu");
+
+            if (menu == 'logout') {
+                localStorage.removeItem("api_token");
+                $(".uk").hide();
+                $(".kr").hide();
+                $(".lg").hide();
+                $(".py-4").load('/login');
+            } else {
+
+                $.get('http://localhost:8000/menu/' + menu,
+
+                    function(data, status) {
+                        $(".py-4").load(data);
+                        localStorage.setItem("menu", data);
+
+                    });
+
+
+            }
+
+        });
+    });
+</script>

@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,20 +5,12 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
+                    <form class="form-login" action="#">
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             </div>
                         </div>
 
@@ -29,39 +18,17 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                <button type="submit" class="btn btn-primary" id="submit">
+                                    Login
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
                             </div>
                         </div>
                     </form>
@@ -70,4 +37,53 @@
         </div>
     </div>
 </div>
-@endsection
+
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content'),
+            }
+        });
+
+        $(".form-login").submit(function() {
+            email = $("#email").val();
+            password = $("#password").val();
+            $.ajax({
+                type: 'POST',
+                data: {
+                    'email': email,
+                    'password': password
+                },
+                url: 'http://localhost:8000/api/users/login',
+                dataType: 'json',
+                success: function(data) {
+                    // console.log(data.conntent.api_token);
+
+                    // console.log(data);
+
+                    if (data.response_code == 404) {
+                        alert(data.message);
+                    } else {
+
+                        localStorage.setItem("api_token", data.conntent.api_token);
+                        $(".uk").show();
+                        $(".kr").show();
+                        $(".lg").show();
+
+                        // // window.location = '/home';
+                        $(".py-4").load('/dashboard');
+                    }
+
+
+                },
+                error: function(status, data) {
+                    console.log(data);
+                    // alert(data);
+                }
+            });
+            return false;
+        });
+    });
+</script>

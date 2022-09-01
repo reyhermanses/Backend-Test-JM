@@ -14,13 +14,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/login', function(){
+//     return view('auth.login');
+// });
 
-Auth::routes();
+Route::get('login', [App\Http\Controllers\HomeController::class, 'login']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/employee', [App\Http\Controllers\HomeController::class, 'employee']);
+Route::get('/unit', [App\Http\Controllers\HomeController::class, 'unit']);
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard']);
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('employee');
+
+// Auth::routes();
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+
+Route::get('/menu/{menu?}', [App\Http\Controllers\HomeController::class, 'menu']);

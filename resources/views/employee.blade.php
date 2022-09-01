@@ -1,9 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-
-
-
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -143,7 +137,7 @@
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content'),
-                    'Authorization': 'Bearer aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX'
+                    'Authorization': 'Bearer ' + localStorage.getItem('api_token')
                 }
             });
 
@@ -155,7 +149,7 @@
                     // console.log(data);
                     $.each(data['data'], function(key, row) {
                         i = key + 1;
-                        
+
                         updated_at = row.updated_at == null ? '-' : formatDate(row.updated_at);
 
                         $("table.table").append(
@@ -170,7 +164,8 @@
                             '<td><span class="badge badge-success"> aktif </span> </td>' +
                             '<td>' + updated_at + '</td>' +
                             '<td>' + row.create_or_update_by.name + '</td>' +
-                            '<td><a href="javascript:void(0)" class="btn btn-primary btn-sm btn-modal" data-toggle="modal" data-target="#modal-form"><i class="mdi mdi-pencil"></i> Edit</a></td>' +
+                            '<td><a href="javascript:void(0)" class="btn btn-primary btn-sm btn-modal" data-toggle="modal" data-target="#modal-form"> Edit</a> ' +
+                            '<a href="javascript:void(0)" class="btn btn-info btn-sm btn-modal" data-toggle="modal" data-target="#modal-form"> Delete</a></td>' +
                             '</tr>'
                         );
                     });
@@ -183,13 +178,6 @@
 
 
             jQuery('body').on('click', '.save', function(e) {
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content'),
-                        'Authorization': 'Bearer aJFFwkeIvQUszcq2lQWdr5fU3CJWpeyFCSFoZHMlqnNXVHpWWHzjt8SLZN2vXSXWPfkypEH3gNuwafGX'
-                    }
-                });
 
                 e.preventDefault(e);
 
@@ -239,9 +227,6 @@
         </div>
     </div>
 
-    @endsection
-
-    @section('script')
     <script>
         let table = $('#table-data').DataTable();
 
@@ -253,4 +238,3 @@
 
         })
     </script>
-    @endsection
