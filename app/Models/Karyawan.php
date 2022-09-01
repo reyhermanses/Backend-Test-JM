@@ -25,8 +25,13 @@ class Karyawan extends Model
     ];
 
     protected $unitIdKey = 'unit_id';
+    protected $userId = 'created_by';
 
     public function has_unit_kerja(){
         return $this->hasOne(UnitKerja::class, 'id', $this->unitIdKey);
+    }
+
+    public function create_or_update_by(){
+        return $this->hasOne(User::class, 'id', $this->userId);
     }
 }
