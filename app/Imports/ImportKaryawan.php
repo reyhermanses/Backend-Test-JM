@@ -40,7 +40,7 @@ class ImportKaryawan implements ToModel, WithHeadingRow, SkipsOnFailure, WithVal
             'date_of_birth' => $this->transform_date($row['dateofbirth']),
             'place_of_birth' => $row['placeofbirth'],
             // 'created_at' => date('Y-m-d H:i:s'),
-            // 'created_by' => auth()->user()->id,
+            'created_by' => auth()->user()->id,
         ]);
     }
 
