@@ -26,26 +26,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Information Technology Group</td>
-                                            <td><span class="badge badge-success">Active</span></td>
-                                            <td>10 December 2022, 19:08</td>
-                                            <td>Superadmin</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-modal" data-target="#modal-form"><i class="mdi mdi-pencil"></i> Edit</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Accounting & Tax</td>
-                                            <td><span class="badge badge-danger">Inactive</span></td>
-                                            <td>4 September 2022, 19:08</td>
-                                            <td>Superadmin</td>
-                                            <td>
-                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-modal" data-target="#modal-form"><i class="mdi mdi-pencil"></i> Edit</a>
-                                            </td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -89,6 +70,81 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+
+            function formatDate(date) {
+                var d = new Date(date),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+
+                if (month.length < 2)
+                    month = '0' + month;
+                if (day.length < 2)
+                    day = '0' + day;
+
+                return [year, month, day].join('-');
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content'),
+                    'Authorization': 'Bearer ' + localStorage.getItem('api_token')
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:8000/api/unit-kerja/',
+                dataType: 'json',
+                success: function(data) {
+                    // console.log(data);
+                    $.each(data['data'], function(key, row) {
+                        i = key + 1;
+
+                        created_at = row.created_at == null ? '-' : formatDate(row.created_at);
+                        updated_at = row.updated_at == null ? '-' : formatDate(row.created_at);
+
+                        $("table.table").append(
+                            '<tr>' +
+                            '<td>' + i + '</td>' +
+                            '<td>' + row.name + '</td>' +
+                            '<td> aktif </td>' +
+                            '<td>' + updated_at + '</td>' +
+                            '<td>' + row.belongs_to_karyawan.name + '</td>' +
+                            '<td><a href="javascript:void(0)" class="btn btn-primary btn-sm btn-modal" data-toggle="modal" data-target="#modal-form"> Edit</a> ' +
+                            '<a href="javascript:void(0)" class="btn btn-info btn-sm btn-modal" data-toggle="modal" data-target="#modal-form"> Delete</a></td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function(status, data) {
+                    console.log('Error:', data);
+                }
+            })
+
+
+
+            jQuery('body').on('click', '.save', function(e) {
+
+                e.preventDefault(e);
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:8000/api/user/',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    error: function(status, data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+        });
+    </script>
 
     <script>
         let table = $('#table-data').DataTable();
