@@ -21,7 +21,7 @@ class KaryawanController extends Controller
 
     public function index(Karyawan $karyawan)
     {
-        return new KaryawanResource($karyawan::with('has_unit_kerja','create_or_update_by')->get());
+        return new KaryawanResource($karyawan::with('has_unit_kerja','create_or_update_by')->paginate(10));
     }
 
     public function create(PostKaryawanRequest $request)

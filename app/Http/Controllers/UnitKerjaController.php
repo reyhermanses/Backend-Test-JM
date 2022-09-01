@@ -19,7 +19,7 @@ class UnitKerjaController extends Controller
 
     public function index(UnitKerja $unitKerja)
     {
-        return UnitKerjaResource::collection($unitKerja::with('belongsToKaryawan')->get());
+        return UnitKerjaResource::collection($unitKerja::with('belongsToKaryawan')->paginate(10));
     }
 
     public function display_with_karyawan()

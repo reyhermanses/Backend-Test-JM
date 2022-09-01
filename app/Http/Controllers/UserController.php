@@ -27,8 +27,7 @@ class UserController extends Controller
     public function index()
     {
         //
-
-        return new UserResource(User::all());
+        return new UserResource(User::paginate(10));
     }
 
     public function logged_user_information(Request $request)
