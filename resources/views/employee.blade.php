@@ -7,8 +7,8 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-modal" data-toggle="modal" data-target="#modal-form"><i class="mdi mdi-plus"></i> New Data</a>
-                                <a href="javascript:void(0)" class="btn btn-sm btn-success btn-modal" data-toggle="modal" data-target="#modal-import"><i class="mdi mdi-download"></i> Import</a>
+                                <a href="#" class="btn btn-sm btn-primary btn-modal" data-toggle="modal" data-target="#modal-form"><i class="mdi mdi-plus"></i> New Data</a>
+                                <a href="#" class="btn btn-sm btn-success btn-modal" data-toggle="modal" data-target="#modal-import"><i class="mdi mdi-download"></i> Import</a>
                             </div>
                         </div>
 
@@ -140,7 +140,6 @@
                     'Authorization': 'Bearer ' + localStorage.getItem('api_token')
                 }
             });
-
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:8000/api/karyawan/',
@@ -152,11 +151,14 @@
 
                         updated_at = row.updated_at == null ? '-' : formatDate(row.updated_at);
 
+                        var unit_kerja = 'has_unit_kerja' in row && row[0] || '-';
+
+
                         $("table.table").append(
                             '<tr>' +
                             '<td>' + i + '</td>' +
                             '<td>' + row.nik + '</td>' +
-                            '<td>' + row.has_unit_kerja.name + '</td>' +
+                            '<td>' + unit_kerja + '</td>' +
                             '<td>' + row.name + '</td>' +
                             '<td>' + row.position_name + '</td>' +
                             '<td>' + row.date_of_birth + '</td>' +
@@ -226,15 +228,3 @@
             </div>
         </div>
     </div>
-
-    <script>
-        let table = $('#table-data').DataTable();
-
-        $('.btn-modal').on('click', function() {
-
-            let modal = $(this).attr('data-target')
-
-            $(modal).modal('show')
-
-        })
-    </script>

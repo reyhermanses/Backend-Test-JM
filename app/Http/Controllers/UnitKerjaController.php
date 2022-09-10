@@ -19,7 +19,7 @@ class UnitKerjaController extends Controller
 
     public function index(UnitKerja $unitKerja)
     {
-        return UnitKerjaResource::collection($unitKerja::with('belongsToKaryawan')->paginate(10));
+        return UnitKerjaResource::collection($unitKerja::with('updated_by')->paginate(10));
     }
 
     public function display_with_karyawan()
@@ -47,7 +47,7 @@ class UnitKerjaController extends Controller
 
         try {
             //code...
-            $unitKerja::find($unit_kerja_id)->update(['name' => $request->name]);
+            $unitKerja::find($unit_kerja_id)->update(['name' => $request->name, '']);
             return new UnitKerjaResource($unitKerja::find($unit_kerja_id));
         } catch (\Throwable $th) {
             //throw $th;

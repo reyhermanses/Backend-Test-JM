@@ -106,8 +106,8 @@
 
         if (api_token != null) {
             $(".uk").show();
-                $(".kr").show();
-                $(".lg").show();
+            $(".kr").show();
+            $(".lg").show();
 
             if (menu != null) {
                 displayMenu = menu;
@@ -116,8 +116,8 @@
             }
         } else {
             $(".uk").hide();
-                $(".kr").hide();
-                $(".lg").hide();
+            $(".kr").hide();
+            $(".lg").hide();
             displayMenu = '/login';
         }
 
@@ -151,4 +151,29 @@
 
         });
     });
+
+
+    let table = $('#table-data').DataTable();
+
+    $('.btn-modal').on('click', function() {
+
+        let modal = $(this).attr('data-target');
+
+        $(modal).modal('show')
+
+    })
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
 </script>

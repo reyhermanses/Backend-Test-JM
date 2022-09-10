@@ -19,7 +19,7 @@ class UnitKerja extends Model
         'updated_by'
     ];
 
-    public function belongsToKaryawan(){
-        return $this->belongsTo(Karyawan::class, 'id', 'unit_id');
+    public function updated_by(){
+        return $this->hasOne(User::class, 'id', 'created_by');
     }
 }
